@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pocket Arcade - Full Game Hub</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="theme-dark">
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <button class="brand" data-target="home" aria-label="Go to home">
+        <span class="brand-mark">PA</span>
+        <span><strong>Pocket Arcade</strong><small>Full browser game hub</small></span>
+      </button>
+      <nav class="top-nav" aria-label="Main navigation">
+        <button class="nav-btn active" data-target="home">Home</button>
+        <button class="nav-btn" data-target="games">Games</button>
+        <button class="nav-btn" data-target="gallery">Gallery</button>
+        <button class="nav-btn" data-target="contact">Contact</button>
+      </nav>
+      <button id="themeToggleBtn" class="btn btn-outline">Theme</button>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section id="home" class="section active">
+      <div class="hero">
+        <p class="eyebrow">HTML / CSS / JS full hub</p>
+        <h1>Mini Game Hub</h1>
+        <p class="hero-sub">Four playable browser games in one responsive arcade hub: Void Salvage, Rune Gambit, Neon Labyrinth, and Glitch Garden.</p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" data-target="games">Play Games</button>
+          <button id="rulesToggleBtn" class="btn btn-ghost">Show Rules</button>
+        </div>
+      </div>
+
+      <div id="rulesBlock" class="rules-card hidden">
+        <h2>Hub Rules</h2>
+        <ol>
+          <li>Open the Games section.</li>
+          <li>Pick a game tab.</li>
+          <li>Use the start/reset buttons inside each game.</li>
+          <li>Keyboard games use WASD or arrow keys.</li>
+          <li>The hub is split into index.html, style.css, and script.js.</li>
+        </ol>
+      </div>
+
+      <div class="section-title"><h2>Featured Games</h2></div>
+      <div class="game-cards">
+        <article class="game-card"><span class="game-icon void-icon"></span><h3>Void Salvage</h3><p>Move a salvage ship, collect crystals, dodge mines, defeat drones, and buy upgrades.</p><button class="btn btn-small" data-target="games" data-game-jump="void">Play</button></article>
+        <article class="game-card"><span class="game-icon rune-icon"></span><h3>Rune Gambit</h3><p>Roll rune dice, lock symbols, build combos, block enemy attacks, and survive rounds.</p><button class="btn btn-small" data-target="games" data-game-jump="rune">Play</button></article>
+        <article class="game-card"><span class="game-icon maze-icon"></span><h3>Neon Labyrinth</h3><p>Collect keys, use matching portals, avoid hazards, and outsmart hunters that scale over time.</p><button class="btn btn-small" data-target="games" data-game-jump="maze">Play</button></article>
+        <article class="game-card"><span class="game-icon garden-icon"></span><h3>Glitch Garden</h3><p>Dig a clean endpoint-only path, place towers and traps, unlock areas, and fight the wave 100 boss.</p><button class="btn btn-small" data-target="games" data-game-jump="garden">Play</button></article>
+      </div>
+    </section>
+
+    <section id="games" class="section">
+      <div class="section-title"><h2>Playable Games</h2></div>
+      <div class="game-tabs">
+        <button class="game-tab active" data-game="void">Void Salvage</button>
+        <button class="game-tab" data-game="rune">Rune Gambit</button>
+        <button class="game-tab" data-game="maze">Neon Labyrinth</button>
+        <button class="game-tab" data-game="garden">Glitch Garden</button>
+      </div>
+
+      <div id="void" class="game-screen active">
+        <div class="panel">
+          <h3>Void Salvage</h3>
+          <p>Move with WASD or arrow keys. Collect crystals, avoid mines, shoot drones automatically, and buy upgrades with scrap.</p>
+          <div class="hud">
+            <div><span>Wave</span><strong id="voidWave">1</strong></div>
+            <div><span>Hull</span><strong id="voidHp">100</strong></div>
+            <div><span>Scrap</span><strong id="voidScrap">0</strong></div>
+            <div><span>Score</span><strong id="voidScore">0</strong></div>
+          </div>
+          <canvas id="voidCanvas" class="game-canvas wide-canvas" width="720" height="420"></canvas>
+          <p id="voidMsg" class="message">Press Start Run.</p>
+          <div class="shop-row">
+            <button class="btn btn-small" data-void-up="speed">Speed 30</button>
+            <button class="btn btn-small" data-void-up="damage">Damage 35</button>
+            <button class="btn btn-small" data-void-up="repair">Repair 25</button>
+          </div>
+          <div class="game-actions"><button id="voidStartBtn" class="btn btn-primary">Start Run</button><button id="voidResetBtn" class="btn btn-outline">Reset</button></div>
+        </div>
+      </div>
+
+      <div id="rune" class="game-screen">
+        <div class="panel">
+          <h3>Rune Gambit</h3>
+          <p>Roll runes, click to lock useful symbols, then resolve. Combos create damage, block, healing, gold, or burst effects.</p>
+          <div class="hud">
+            <div><span>Round</span><strong id="runeRound">1</strong></div>
+            <div><span>HP</span><strong id="runeHp">40</strong></div>
+            <div><span>Enemy</span><strong id="runeEnemyHp">35</strong></div>
+            <div><span>Gold</span><strong id="runeGold">0</strong></div>
+          </div>
+          <div id="runeEnemy" class="enemy-card">Enemy preparing attack.</div>
+          <div id="runeGrid" class="rune-grid"></div>
+          <p id="runeMsg" class="message">Press New Battle.</p>
+          <div class="game-actions"><button id="runeStartBtn" class="btn btn-primary">New Battle</button><button id="runeRollBtn" class="btn">Roll</button><button id="runeResolveBtn" class="btn btn-outline">Resolve</button></div>
+        </div>
+      </div>
+
+      <div id="maze" class="game-screen">
+        <div class="panel">
+          <h3>Neon Labyrinth</h3>
+          <p>Move with WASD or arrow keys. Collect keys, reach the exit, avoid hazards, and outplay hunters. Every 10 rooms adds a hunter. Every 15 rooms adds a portal pair.</p>
+          <div class="hud">
+            <div><span>Level</span><strong id="mazeLevel">1</strong></div>
+            <div><span>Keys</span><strong id="mazeKeys">0/2</strong></div>
+            <div><span>Lives</span><strong id="mazeLives">2</strong></div>
+            <div><span>Hunters</span><strong id="mazeHunters">1</strong></div>
+            <div><span>Hazards</span><strong id="mazeHazards">0</strong></div>
+            <div><span>Rooms</span><strong id="mazeRooms">0</strong></div>
+          </div>
+          <canvas id="mazeCanvas" class="game-canvas square-canvas" width="520" height="520"></canvas>
+          <p id="mazeMsg" class="message">Press Start Maze.</p>
+          <div id="mazeUpgradeShop" class="shop-row hidden">
+            <button class="btn btn-small" data-maze-up="life">Extra Life</button>
+            <button class="btn btn-small" data-maze-up="slow">Slow Hunters</button>
+            <button class="btn btn-small" data-maze-up="phase">Phase +2</button>
+            <button class="btn btn-small" data-maze-up="radar">Radar +3</button>
+          </div>
+          <div class="game-actions"><button id="mazeStartBtn" class="btn btn-primary">Start Maze</button><button id="mazeResetBtn" class="btn btn-outline">New Run</button></div>
+        </div>
+      </div>
+
+      <div id="garden" class="game-screen">
+        <div class="panel">
+          <h3>Glitch Garden</h3>
+          <p>The grid starts covered in blocks. Remove only the highlighted block at the front of the path. New path blocks cannot sit beside older path blocks. Place turrets off the path and traps on the path.</p>
+          <div class="hud">
+            <div><span>Area</span><strong id="gardenArea">1</strong></div>
+            <div><span>Wave</span><strong id="gardenWave">1</strong></div>
+            <div><span>Money</span><strong id="gardenMoney">130</strong></div>
+            <div><span>Core</span><strong id="gardenCore">20</strong></div>
+            <div><span>Kills</span><strong id="gardenKills">0</strong></div>
+            <div><span>Path</span><strong id="gardenPath">Open</strong></div>
+          </div>
+          <div class="choice-row">
+            <button class="btn btn-small" data-garden-area="1">Area 1 Training</button>
+            <button class="btn btn-small btn-outline" data-garden-area="2">Area 2 Flood Grid</button>
+            <button class="btn btn-small btn-ghost" data-garden-area="3">Area 3 Blackout Core</button>
+          </div>
+          <div class="shop-row">
+            <button class="btn btn-small" data-garden-tool="dig">Remove Block +4</button>
+            <button class="btn btn-small" data-garden-tool="pulse">Pulse 55</button>
+            <button class="btn btn-small" data-garden-tool="frost">Frost 75</button>
+            <button class="btn btn-small" data-garden-tool="rail">Rail 115</button>
+            <button class="btn btn-small" data-garden-tool="acid">Acid 90</button>
+            <button class="btn btn-small" data-garden-tool="beacon">Beacon 120</button>
+            <button class="btn btn-small btn-outline" data-garden-tool="tar">Tar 45</button>
+            <button class="btn btn-small btn-outline" data-garden-tool="spikes">Spikes 40</button>
+            <button class="btn btn-small btn-outline" data-garden-tool="emp">EMP 85</button>
+            <button class="btn btn-small btn-outline" data-garden-tool="flame">Flame 70</button>
+            <button class="btn btn-small btn-outline" data-garden-tool="crusher">Crusher 105</button>
+          </div>
+          <canvas id="gardenCanvas" class="game-canvas wide-canvas" width="720" height="480"></canvas>
+          <p id="gardenMsg" class="message">Select Remove Block, then click one highlighted block at the front of the path.</p>
+          <div id="gardenBossChoice" class="game-actions hidden"><button id="gardenMenuBtn" class="btn btn-outline">Back to Menu</button><button id="gardenEndlessBtn" class="btn btn-primary">Keep Going</button></div>
+          <div class="game-actions"><button id="gardenStartBtn" class="btn btn-primary">Start Wave</button><button id="gardenResetBtn" class="btn btn-outline">Reset Run</button></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery" class="section">
+      <div class="section-title"><h2>Gallery</h2></div>
+      <div class="gallery-grid">
+        <article><span class="preview preview-void"></span><h3>Void Salvage</h3><p>Arcade survival and salvage collecting.</p></article>
+        <article><span class="preview preview-rune"></span><h3>Rune Gambit</h3><p>Dice-lock combat with combo planning.</p></article>
+        <article><span class="preview preview-maze"></span><h3>Neon Labyrinth</h3><p>Maze escape with hunters and portals.</p></article>
+        <article><span class="preview preview-garden"></span><h3>Glitch Garden</h3><p>Path-digging tower defense.</p></article>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="section-title"><h2>Contact / Feedback</h2></div>
+      <form id="feedbackForm" class="feedback-form">
+        <label>Name<input id="fbName" type="text" placeholder="Player" /></label>
+        <label>Favorite Game<select id="fbGame"><option>Void Salvage</option><option>Rune Gambit</option><option>Neon Labyrinth</option><option>Glitch Garden</option></select></label>
+        <label>Feedback<textarea id="fbMessage" rows="5" placeholder="What should be changed or added?"></textarea></label>
+        <button class="btn btn-primary" type="submit">Send Feedback</button>
+      </form>
+      <p id="feedbackThanks" class="message hidden"></p>
+    </section>
+  </main>
+
+  <footer><div class="wrap footer-inner"><strong>Pocket Arcade</strong><span>Separated full hub build: index.html + style.css + script.js</span></div></footer>
+  <script src="script.js"></script>
+</body>
+</html>
