@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pocket Arcade</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Exo+2:wght@300;400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="theme-dark">
+    <!-- HEADER -->
+    <header>
+      <div class="header-inner">
+        <div class="logo">
+          <span class="logo-text">Pocket<span class="accent">Arcade</span></span>
+        </div>
+        <button id="themeToggleBtn" class="btn btn-outline">Change Theme</button>
+      </div>
+    </header>
+
+    <!-- NAVIGATION -->
+    <nav>
+      <div class="nav-inner">
+        <button class="nav-btn active" data-target="home">Home</button>
+        <button class="nav-btn" data-target="reaction">Reaction</button>
+        <button class="nav-btn" data-target="rune">Rune</button>
+        <button class="nav-btn" data-target="labyrinth">Labyrinth</button>
+        <button class="nav-btn" data-target="glitch">Glitch</button>
+        <button class="nav-btn" data-target="gallery">Gallery</button>
+        <button class="nav-btn" data-target="contact">Contact</button>
+      </div>
+    </nav>
+
+    <main>
+      <!-- HOME SECTION -->
+      <section id="home" class="section active">
+        <div class="hero">
+          <h1 class="hero-title">Welcome to your <span class="accent glow">Pocket Arcade</span></h1>
+          <p class="hero-sub">
+            A collection of bite‑sized games built for fun breaks and casual
+            competition. Choose a game from the menu and dive in!
+          </p>
+          <div class="hero-cta">
+            <button class="btn btn-primary" data-target="reaction" id="playNowBtn">Play Reaction</button>
+            <button class="btn btn-outline" data-target="glitch">Play Glitch Garden</button>
+          </div>
+        </div>
+        <div class="section-title-wrap">
+          <h2 class="section-heading">About Pocket Arcade</h2>
+          <div class="divider"></div>
+        </div>
+        <p class="about-text">
+          Pocket Arcade is designed for students and casual players who want quick
+          and engaging games without downloads or installs. Our titles span reflex
+          challenges, strategic card play, maze puzzlers and tower defense. Every
+          game runs directly in the browser and switches between light and dark
+          themes.
+        </p>
+      </section>
+
+      <!-- REACTION GAME SECTION -->
+      <section id="reaction" class="section">
+        <div class="section-title-wrap">
+          <h2 class="section-heading">Reaction Click</h2>
+          <div class="divider"></div>
+        </div>
+        <div class="game-wrapper">
+          <!-- Setup Panel -->
+          <div id="reactionSetup" class="game-panel">
+            <h3 class="panel-title">Enter Your Name</h3>
+            <input type="text" id="reactionPlayer" class="game-input" placeholder="Your name…" maxlength="20" />
+            <button id="reactionStart" class="btn btn-primary btn-lg">Start Game</button>
+          </div>
+          <!-- Game Arena -->
+          <div id="reactionArena" class="game-panel hidden">
+            <div class="game-hud">
+              <div class="hud-block">
+                <span class="hud-label">PLAYER</span>
+                <span id="reactionName" class="hud-value">—</span>
+              </div>
+              <div class="hud-block">
+                <span class="hud-label">SCORE</span>
+                <span id="reactionScore" class="hud-value accent">0</span>
+              </div>
+              <div class="hud-block">
+                <span class="hud-label">TIME</span>
+                <span id="reactionTimer" class="hud-value timer-val">20</span>
+              </div>
+            </div>
+            <div id="reactionArea" class="click-area">
+              <div id="reactionTarget" class="click-target"></div>
+            </div>
+          </div>
+          <!-- Game Over -->
+          <div id="reactionOver" class="game-panel hidden">
+            <div class="game-over-icon">🏆</div>
+            <h3 class="panel-title">Game Over!</h3>
+            <p id="reactionFinal" class="final-msg"></p>
+            <button id="reactionRestart" class="btn btn-primary btn-lg">Restart</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- RUNE GAMBIT SECTION -->
+      <section id="rune" class="section">
+        <div class="section-title-wrap">
+          <h2 class="section-heading">Rune Gambit</h2>
+          <div class="divider"></div>
+        </div>
+        <p class="coming-text">
+          Rune Gambit is a tactical dice battler that combines runes and roguelike
+          progression. This mode is under construction.
+        </p>
+      </section>
+
+      <!-- LABYRINTH SECTION -->
+      <section id="labyrinth" class="section">
+        <div class="section-title-wrap">
+          <h2 class="section-heading">Neon Labyrinth</h2>
+          <div class="divider"></div>
+        </div>
+        <div class="labyrinth-wrapper">
+          <canvas id="labyrinthCanvas" width="480" height="480"></canvas>
+          <div class="labyrinth-info">
+            <p>Use arrow keys or WASD to navigate the maze. Escape each room
+              while collecting all keys and avoiding hunters. Every few rooms,
+              choose upgrades to aid your journey. New hunters and hazards
+              gradually appear. The maze generator ensures multiple routes to
+              the exit and checks that the keys and exit are always reachable.
+            </p>
+            <button id="labyrinthStart" class="btn btn-primary btn-lg">Start Labyrinth</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- GLITCH GARDEN SECTION -->
+      <section id="glitch" class="section">
+        <div class="section-title-wrap">
+          <h2 class="section-heading">Glitch Garden</h2>
+          <div class="divider"></div>
+        </div>
+        <div class="glitch-hud">
+          <div class="hud-block"><span class="hud-label">WAVE</span><span id="ggWave" class="hud-value">1</span></div>
+          <div class="hud-block"><span class="hud-label">MONEY</span><span id="ggMoney" class="hud-value">100</span></div>
+          <div class="hud-block"><span class="hud-label">LIVES</span><span id="ggLives" class="hud-value">10</span></div>
+        </div>
+        <div class="glitch-wrapper">
+          <div id="glitchBoard" class="glitch-board"></div>
+          <div class="glitch-sidebar">
+            <h3 class="sidebar-title">Build &amp; Trap</h3>
+            <div id="glitchToolbar" class="toolbar"></div>
+            <div class="sidebar-controls">
+              <button id="ggStartWave" class="btn btn-primary btn-full">Start Wave</button>
+              <button id="ggReset" class="btn btn-outline btn-full">Reset Map</button>
+            </div>
+          </div>
+        </div>
+        <div id="ggMessage" class="gg-message hidden"></div>
+      </section>
+
+      <!-- GALLERY SECTION -->
+      <section id="gallery" class="section">
+        <div class="section-title-wrap">
+          <h2 class="section-heading">Arcade Gallery</h2>
+          <div class="divider"></div>
+        </div>
+        <div class="slider-wrap">
+          <div class="slider-container">
+            <img id="sliderImg" src="" alt="Gallery" class="slider-img" />
+            <div class="slider-overlay">
+              <p id="sliderCaption" class="slider-caption"></p>
+              <span id="sliderCount" class="slider-count"></span>
+            </div>
+          </div>
+          <div class="slider-controls">
+            <button id="prevBtn" class="btn btn-outline">◀ Prev</button>
+            <div class="slider-dots" id="sliderDots"></div>
+            <button id="nextBtn" class="btn btn-outline">Next ▶</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT SECTION -->
+      <section id="contact" class="section">
+        <div class="section-title-wrap">
+          <h2 class="section-heading">Send Feedback</h2>
+          <div class="divider"></div>
+        </div>
+        <div class="form-wrap">
+          <div id="feedbackThanks" class="thanks-card hidden"></div>
+          <form id="feedbackForm" class="feedback-form" novalidate>
+            <div class="form-group">
+              <label for="fbName">Your Name</label>
+              <input type="text" id="fbName" class="form-input" placeholder="Enter your name" required />
+            </div>
+            <div class="form-group">
+              <label for="fbGame">Favourite Game</label>
+              <select id="fbGame" class="form-input form-select">
+                <option value="">— Pick one —</option>
+                <option value="Reaction Click">Reaction Click</option>
+                <option value="Rune Gambit">Rune Gambit</option>
+                <option value="Neon Labyrinth">Neon Labyrinth</option>
+                <option value="Glitch Garden">Glitch Garden</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="fbMessage">Your Feedback</label>
+              <textarea id="fbMessage" class="form-input form-textarea" placeholder="Tell us what you think…" rows="5"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-full">Submit Feedback</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-inner">
+        <p class="footer-logo">Pocket<span class="accent">Arcade</span></p>
+        <p class="footer-copy">© 2026 Pocket Arcade — Built for students &amp; casual players everywhere.</p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
